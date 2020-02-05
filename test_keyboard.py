@@ -1,13 +1,10 @@
+# This file runs in Linux with sudo, and it requires the pip3 package keyboard
 import keyboard
 import string
 from threading import *
 
-
-# I can't find a complete list of keyboard keys, so this will have to do:
+# Adding keys -> ascii + special characters
 keys = list(string.ascii_lowercase)
-"""
-Optional code(extra keys):
-"""
 keys.append("space_bar")
 keys.append("shift")
 keys.append("esc")
@@ -16,17 +13,6 @@ keys.append("left")
 keys.append("right")
 keys.append("down")
 keys.append("ctrl")
-
-def listen(key):
-    while True:
-        keyboard.wait(key)
-        if key in action_dict:
-            print("[+] Pressed",action_dict[key])
-threads = [Thread(target=listen, kwargs={"key":key}) for key in keys]
-for thread in threads:
-    thread.start()
-
-
 
 action_dict = {
     "d":'MOVE_EAST',
@@ -57,6 +43,19 @@ action_dict = {
     "b": 'CRAFT_TREE_TAP',
     "v": 'CRAFT_POGO_STICK'
 }
+
+def listen(key):
+    while True:
+        keyboard.wait(key)
+        if key in action_dict:
+            print("[+] Pressed",action_dict[key])
+threads = [Thread(target=listen, kwargs={"key":key}) for key in keys]
+for thread in threads:
+    thread.start()
+
+
+
+
 
 
 """
