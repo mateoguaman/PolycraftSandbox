@@ -63,7 +63,8 @@ import keyboard
 import string
 from threading import *
 
-import PolycraftGym, time, json
+from PolycraftAIGym import PolycraftGym
+import time, json
 #, numpy as np
 #import numpy as np
 #import cv2
@@ -98,7 +99,9 @@ def listen(key):
                 data = gym.step_command(action_dict[key])
                 print(data)
             except:
-                pass
+                print("======================================================")
+                print("Error Happened")
+                print("======================================================")
 threads = [Thread(target=listen, kwargs={"key":key}) for key in keys]
 for thread in threads:
     thread.start()
